@@ -15,16 +15,24 @@ public class ServiceLayer {
     private ServiceLayer(RepositoryClass repositoryClass){
         this.repositoryClass = repositoryClass;
     }
-    public List<Employees> getempService(){
+    public List<Employees> getEmpService(){
 
         return repositoryClass.findAll();
 
     }
-    public Employees getbyname(String name){
+    public List<Employees> getbyName(String name){
         return repositoryClass.getByName(name);
     }
-    public String saveEmp(String name){
-        return repositoryClass.save(name);
+    public void  saveEmp(Employees emp){
+        repositoryClass.save(emp);
     }
+
+    public Employees getById(String id){
+        return repositoryClass.getById(id);
+    }
+    public Employees deleteById(String id){
+        return repositoryClass.deleteById(id);
+    }
+
 
 }

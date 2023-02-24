@@ -1,6 +1,8 @@
 package com.mongoAtlas.mongoAtlas.repository;
 import com.mongoAtlas.mongoAtlas.entity.Employees;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,11 +17,31 @@ private final MongoTemplate mongotemplete;
     public List<Employees> findAll(){
         return mongotemplete.findAll(Employees.class,collectionName);
     }
-    public Employees getByName(String name){
-        return mongotemplete.findById(name,Employees.class,collectionName);
+    public List<Employees> getByName(String name){
+        Query query = new Query(Criteria.where("name").is(name));
+
+        return mongotemplete.find(query,Employees.class);
+    }
+    public Employees getById(String id){
+        Query query = new Query(Criteria.where("_id").is(id));
+
+        return mongotemplete.findOne(query,Employees.class);
     }
 
-    public String save(String data){
-        return mongotemplete.save(data,collectionName);
+    public Employees findById(String id){
+        return mongotemplete.findById(id,Employees.class);
+
     }
+
+    public Employees deleteById(String id){
+        Query query = new Query(Criteria.where("_id").is(id));
+        return mongotemplete.findAndRemove(query,Employees.class);
+
+    }
+    public void save(Employees emp){
+         mongotemplete.save(emp,collectionName);
+
+    }
+
+
 }
