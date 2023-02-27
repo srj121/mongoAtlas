@@ -23,8 +23,9 @@ public class ServiceLayer {
     public List<Employees> getbyName(String name){
         return repositoryClass.getByName(name);
     }
-    public void  saveEmp(Employees emp){
+    public Object saveEmp(Employees emp){
         repositoryClass.save(emp);
+        return null;
     }
 
     public Employees getById(String id){

@@ -1,0 +1,6 @@
+logging:
+  file:
+    name: log/logfile.log
+    filePattern: log/app-%d{MM-dd-yy-HH-mm-ss}-%i.log.gz
+  level:
+    root: info

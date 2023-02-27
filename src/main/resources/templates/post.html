@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PostMapping</title>
+</head>
+<body>
+<!-- HTML form with input field and submit button -->
+<form th:action="addEmp"  method="post">
+  <label>Enter ID:</label>
+  <input name="id" type="text"><br><br>
+  <label>Enter Name:</label>
+  <input name="name" type="text"><br><br>
+  <label>Enter Address:</label>
+  <input name="address" type="text"><br><br>
+  <button  type="submit">Get User</button>
+
+
+</form>
+
+</body>
+</html>

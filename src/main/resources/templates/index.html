@@ -6,17 +6,51 @@
     <title>GetMapping</title>
 </head>
 <body>
-<!-- HTML form with input field and submit button -->
 <form th:action="main"  method="post">
     <label>Enter ID:</label>
     <input name="id" type="text"><br><br>
     <label>Enter Name:</label>
-    <input name="name" type="text"><br><br>
+    <input id="name1" name="name" type="text"><br><br>
     <label>Enter Address:</label>
     <input name="address" type="text"><br><br>
-    <button  type="submit">Get User</button>
+    <button  type="submit">Get User</button> <button> <a href="http://localhost:8080/getall">GET ALL</a> </button>
+    <button> <a href="#" id="name">Get By Name</a> </button>
+
+    <p id="output"></p>
+    <button onclick="getInputValue()" >get output</button>
+
+
+</form>
+<form>
+    <p>Enter name to find</p>
+    <label>Enter Name:</label>
+    <input  id="name2" name="name" type="text"><br><br>
+<!--    <button> <a href="#" >Get By Name</a> </button>-->
+    <button onclick="getInputValue()"  >get output 2</button>
 
 </form>
 
+<script>
+    var myVar = document.getElementsByName("name");
+   var link = document.getElementById("name");
+    console.log(myVar);
+    link.href = "http://localhost:8080/getEmpByName?name=" + myVar;
+</script>
+<script>
+    function getInputValue() {
+        // Get the input element
+        var inputElement = document.getElementById("name2");
+        // Get the value of the input element
+        var inputValue = inputElement.value;
+        // Display the value in the output element
+        var outputElement = document.getElementById("output");
+        outputElement.innerHTML = "Hello, " + inputValue + "!";
+
+        link = document.getElementById("name");
+        link.href = "http://localhost:8080/getEmpByName?name=" + inputValue;
+        link.setAttribute('href', 'http://localhost:8080/getEmpByName?name=');
+
+    }
+</script>
 </body>
 </html>

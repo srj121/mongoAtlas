@@ -1,32 +1,30 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+
 <head>
-    <title>Getdata</title>
-    <meta charset="UTF-8">
-    <link crossorigin="anonymous"
+    <title>List Employees</title>
+
+    <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-          rel="stylesheet" />
+          crossorigin="anonymous" />
 </head>
+
+<body>
 
 <div class="container">
 
-    <h3>List Employees</h3>
+    <h3>List of All Employees </h3>
 
     <hr/>
 
-
-    </style>
-    <table  th:width="500" >
+    <table class="table table-bordered table-striped">
 
         <thead>
-
-    <tr >
-    <th>ID</th>
-    <th>Name</th>
-    <th>Address</th>
-    </tr>
+        <tr >
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+        </tr>
 
         </thead>
         <tbody>
@@ -39,4 +37,8 @@
 
     </table>
 </div>
+
+
+</body>
+
 </html>
