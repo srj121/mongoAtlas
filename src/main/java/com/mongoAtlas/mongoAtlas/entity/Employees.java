@@ -37,6 +37,12 @@ public class Employees {
         this.address = address;
     }
 
+    public Employees(String id, String name, String address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Employees{" +

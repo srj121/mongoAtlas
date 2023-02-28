@@ -9,7 +9,6 @@ import java.util.List;
 @Service
 public class ServiceLayer {
 
-    private  Employees employees;
     private final RepositoryClass repositoryClass;
 
     private ServiceLayer(RepositoryClass repositoryClass){
@@ -23,9 +22,8 @@ public class ServiceLayer {
     public List<Employees> getbyName(String name){
         return repositoryClass.getByName(name);
     }
-    public Object saveEmp(Employees emp){
+    public void saveEmp(Employees emp){
         repositoryClass.save(emp);
-        return null;
     }
 
     public Employees getById(String id){

@@ -3,99 +3,69 @@ package com.mongoAtlas.mongoAtlas.controller;
 import com.mongoAtlas.mongoAtlas.entity.Employees;
 import com.mongoAtlas.mongoAtlas.service.ServiceLayer;
 
-import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 
 
 @RestController
 public class ControllerClass1 {
     private static final Logger logger = LoggerFactory.getLogger(ControllerClass1.class);
+    private static final String page = "list-employees";
     private final ServiceLayer serviceLayer;
      ControllerClass1(ServiceLayer serviceLayer)
      {this.serviceLayer = serviceLayer;}
 
     @RequestMapping("/")
     public ModelAndView index() {
-        ModelAndView mav = new ModelAndView();     //***Index view Page
-        mav.setViewName("index");
-        return mav;
-    }
-//..................................................................................................................
-    @PostMapping("/main")
-    public ModelAndView getMapping(@ModelAttribute Employees emp ) {
-       logger.info("{}",emp);
-        ModelAndView mav = new ModelAndView();          //***Index view Page
-        mav.setViewName("view");
-        mav.addObject("emp",emp);
+        ModelAndView mav = new ModelAndView("index");        //***Index Page
         return mav;
     }
     //..................................................................................................................
 
     @GetMapping("/getall")
     public ModelAndView getEmp(){
-        ModelAndView mav = new ModelAndView("list-employees");
-        mav.addObject("emp", serviceLayer.getEmpService());
-        serviceLayer.getEmpService();
+        ModelAndView mav = new ModelAndView(page);
+        mav.addObject("emp", serviceLayer.getEmpService());  //**Get All API
         return mav;
     }
-    @GetMapping("/getEmpByName/{name}")
-    public ModelAndView getEmpByName(@PathVariable ("name") String name){
-
-        ModelAndView mav = new ModelAndView("view");
+    //..................................................................................................................
+    @GetMapping("/getEmpByName")
+    public ModelAndView getEmpByName(@RequestParam String name){
+    logger.info(name);
+        ModelAndView mav = new ModelAndView(page);                      //** get by Name
         mav.addObject("emp",serviceLayer.getbyName(name));
-        serviceLayer.getbyName(name);
         return mav;
-
     }
-    @GetMapping("/getEmpresponse")
-    public ResponseEntity<Employees> getEmpandresponse(){
-
-        Employees emp = new Employees();
-        emp.setId("id123");
-        emp.setName("rahul");
-        emp.setAddress("nagpur");
-
-        serviceLayer.getEmpService();
-        return new ResponseEntity<>(emp, HttpStatus.OK);
-    }
-
-
-    @GetMapping("/getEmpById/{id}")
-    public Employees getEmpById(@PathVariable ("id") String id, @ModelAttribute Employees emp){
+    //..................................................................................................................
+    @GetMapping("/deleteEmpById")
+    public ModelAndView  deleteById( @RequestParam String id){
         logger.info(id);
-
-        System.out.println("from the class " + emp.getId());
-        return serviceLayer.getById(id);
-    }
-
-    @DeleteMapping("/deleteEmpById/{id}")
-    public ModelAndView  deleteById( @PathVariable ("id") String id){
-        ModelAndView mav = new ModelAndView("view");
+        ModelAndView mav = new ModelAndView(page);                      //** Delete By Id
         mav.addObject("emp", serviceLayer.deleteById(id));
-        serviceLayer.deleteById(id);                                          //*** Delete API
         return mav;
     }
+    //..................................................................................................................
 
-    @RequestMapping("/post")
-        public ModelAndView postPage(){
-         ModelAndView mav = new ModelAndView("post");
-         return mav;
-        }
-
-    @PostMapping("/addEmp")
-    public ModelAndView addEmp(@RequestBody Employees employ){
-         ModelAndView mav = new ModelAndView("view");
-        System.out.println(employ);
-         mav.addObject("emp", serviceLayer.saveEmp(employ));
-        serviceLayer.saveEmp(employ);                                          //Post API
-
+    @GetMapping("/getEmpById")
+    public ModelAndView getEmpById(@RequestParam String id){
+        logger.info(id);
+        ModelAndView mav = new ModelAndView(page);                      //**Get By ID API
+        mav.addObject("emp",serviceLayer.getById(id));
         return mav;
     }
+    //..................................................................................................................
+    @GetMapping("/addEmp")
+    public ModelAndView addEmp(@RequestParam String id,@RequestParam String name, @RequestParam String address){
+        ModelAndView mav = new ModelAndView(page);
+        Employees emp = new Employees(id,name,address);
+        logger.info("{}",emp);                                              //**Post API
+        mav.addObject("emp",emp);
+        serviceLayer.saveEmp(emp);
+        return mav;
+    }
+//......................................................................................................................
+
 }

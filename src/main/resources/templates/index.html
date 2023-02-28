@@ -1,56 +1,97 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>GetMapping</title>
+    <link crossorigin="anonymous"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          rel="stylesheet" />
+    <title>Index Page</title>
 </head>
 <body>
-<form th:action="main"  method="post">
-    <label>Enter ID:</label>
-    <input name="id" type="text"><br><br>
-    <label>Enter Name:</label>
-    <input id="name1" name="name" type="text"><br><br>
-    <label>Enter Address:</label>
-    <input name="address" type="text"><br><br>
-    <button  type="submit">Get User</button> <button> <a href="http://localhost:8080/getall">GET ALL</a> </button>
-    <button> <a href="#" id="name">Get By Name</a> </button>
+<h1 style="text-align: center">Form for Multiple Operations</h1>
+<p>Get all the Data</p>
+    <button> <a href="http://localhost:8080/getall">GET ALL</a> </button>
 
-    <p id="output"></p>
-    <button onclick="getInputValue()" >get output</button>
+    <p>................................................................................................................................................................................</p>
 
-
-</form>
-<form>
+<form th:action="getEmpByName"  method="post">
     <p>Enter name to find</p>
     <label>Enter Name:</label>
-    <input  id="name2" name="name" type="text"><br><br>
-<!--    <button> <a href="#" >Get By Name</a> </button>-->
-    <button onclick="getInputValue()"  >get output 2</button>
+    <label for="name1"></label><input id="name1" name="name" type="text"><br><br>
+    <button  onclick="getInputValue()"> <a href="#" id="name2">Get By Name</a> </button>
 
+    <script>
+        function getInputValue() {
+            let inputElement = document.getElementById("name1");
+
+            link = document.getElementById("name2");
+            link.href = "http://localhost:8080/getEmpByName?name="+ inputElement.value;
+
+        }
+    </script>
+</form>
+    <p>................................................................................................................................................................................</p>
+<form th:action="getEmpById"  method="post">
+    <p>Enter Id to find</p>
+    <label>Enter Id:</label>
+    <label for="name3"></label><input id="name3" name="name" type="text"><br><br>
+    <button  onclick="getInputIdValue()"> <a href="#" id="name4">Get By Id</a> </button>
+
+    <script>
+        function getInputIdValue() {
+            let inputElement = document.getElementById("name3");
+
+            link = document.getElementById("name4");
+            link.href = "http://localhost:8080/getEmpById?id="+ inputElement.value;
+
+        }
+    </script>
+</form>
+    <p>................................................................................................................................................................................</p>
+<form th:action="deleteEmpById"  method="post">
+    <p>Enter Id to Delete</p>
+    <label>Enter Id:</label>
+    <label for="id1"></label><input id="id1" name="name" type="text"><br><br>
+    <button  onclick="getDeleteValue()"> <a href="#" id="id2">Delete By Id</a> </button>
+
+    <script>
+        function getDeleteValue() {
+            let inputElement = document.getElementById("id1");
+
+            link = document.getElementById("id2");
+            link.href = "http://localhost:8080/deleteEmpById?id="+ inputElement.value;
+
+        }
+    </script>
+</form>
+    <p>................................................................................................................................................................................</p>
+
+    <form th:action="addEmp"  method="post">
+        <label>Enter ID:</label>
+        <label for="id"></label><input id="id" name="id" type="text"><br><br>
+        <label>Enter Name:</label>
+        <label for="name"></label><input id="name" name="name" type="text"><br><br>
+        <label>Enter Address:</label>
+        <label for="address"></label><input id="address" name="address" type="text"><br><br>
+        <button onclick="postIt()" > <a href="#" id="id3">Post User</a></button>
+
+        <script>
+            function postIt() {
+                let idElement = document.getElementById("id");
+                let nameElement = document.getElementById("name");
+                let addressElement = document.getElementById("address");
+
+                link = document.getElementById("id3");
+                link.href = "http://localhost:8080/addEmp?id="
+                    + idElement.value
+                    +"&name=" +nameElement.value+
+                    "&address=" +addressElement.value;
+
+            }
+        </script>
 </form>
 
-<script>
-    var myVar = document.getElementsByName("name");
-   var link = document.getElementById("name");
-    console.log(myVar);
-    link.href = "http://localhost:8080/getEmpByName?name=" + myVar;
-</script>
-<script>
-    function getInputValue() {
-        // Get the input element
-        var inputElement = document.getElementById("name2");
-        // Get the value of the input element
-        var inputValue = inputElement.value;
-        // Display the value in the output element
-        var outputElement = document.getElementById("output");
-        outputElement.innerHTML = "Hello, " + inputValue + "!";
 
-        link = document.getElementById("name");
-        link.href = "http://localhost:8080/getEmpByName?name=" + inputValue;
-        link.setAttribute('href', 'http://localhost:8080/getEmpByName?name=');
-
-    }
-</script>
 </body>
 </html>
