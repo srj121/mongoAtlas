@@ -28,11 +28,6 @@ private final MongoTemplate mongotemplete;
         return mongotemplete.findOne(query,Employees.class);
     }
 
-    public Employees findById(String id){
-        return mongotemplete.findById(id,Employees.class);
-
-    }
-
     public Employees deleteById(String id){
         Query query = new Query(Criteria.where("_id").is(id));
         return mongotemplete.findAndRemove(query,Employees.class);
