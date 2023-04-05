@@ -1,6 +1,11 @@
 logging:
+  Level:
+    com/mongoAtlas/mongoAtlas: TRACE
   file:
-    name: log/logfile.log
-    filePattern: log/app-%d{MM-dd-yy-HH-mm-ss}-%i.log.gz
-  level:
-    root: info
+    name: src/main/resources/logs/mongoTemplate-logs.log
+  logback:
+    rollingpolicy:
+      file-name-pattern: mongoTemplate-logs-%d{yyyy-MM-dd}. %i.log
+      max-file-size: 5MB
+      total-size-cap: 1GB
+      max-history: 30
